@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Project {
+  id            Int           @id @default(autoincrement())
+  name          String        @unique
+  projectTeches ProjectTech[]
+}
+
+model Tech {
+  id            Int           @id @default(autoincrement())
+  name          String        @unique
+  release       String
+  projectTeches ProjectTech[]
+}
+
+model ProjectTech {
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId Int
+  tech      Tech    @relation(fields: [techId], references: [id])
+  techId    Int
+
+  @@unique([projectId, techId])
+}
