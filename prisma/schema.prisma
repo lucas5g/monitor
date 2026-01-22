@@ -14,23 +14,29 @@ datasource db {
 }
 
 model Project {
-  id            Int           @id @default(autoincrement())
-  name          String        @unique
-  projectTeches ProjectTech[]
+  id           Int           @id @default(autoincrement())
+  name         String        @unique
+  techs ProjectTech[]
+
+  @@map("projects")
 }
 
 model Tech {
-  id            Int           @id @default(autoincrement())
-  name          String        @unique
-  release       String
-  projectTeches ProjectTech[]
+  id           Int           @id @default(autoincrement())
+  name         String        @unique
+  release      String
+  projects ProjectTech[]
+
+  @@map("techs")
 }
 
 model ProjectTech {
-  project   Project @relation(fields: [projectId], references: [id])
-  projectId Int
-  tech      Tech    @relation(fields: [techId], references: [id])
-  techId    Int
+  project     Project @relation(fields: [project_id], references: [id])
+  project_id   Int
+  tech        Tech    @relation(fields: [tech_id], references: [id])
+  tech_id      Int
+  release_used String
 
-  @@unique([projectId, techId])
+  @@unique([project_id, tech_id])
+  @@map("projects_techs")
 }
