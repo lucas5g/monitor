@@ -1,5 +1,5 @@
-import { ProjectService } from '@/backend/projects/project.service';
-import { TechnologyService } from '@/backend/technology/technology.service';
+import { ProjectService } from '@/services/projects/project.service';
+import { TechnologyService } from '@/services/technology/technology.service';
 import { Table } from '@/components/Table';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge'; // Supondo que você tenha um componente Badge
